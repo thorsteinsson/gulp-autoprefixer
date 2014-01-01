@@ -24,7 +24,7 @@ describe('gulp-autoprefixer', function() {
       should.exist(newFile.contents);
       newFile.path.should.equal("/home/test/file.css");
       newFile.shortened.should.equal("file.css");
-      String(newFile.contents).should.equal(autoprefixer.compile(testfile));
+      String(newFile.contents).should.equal(autoprefixer.process(testfile).css);
       done();
     });
 
@@ -54,7 +54,7 @@ describe('gulp-autoprefixer', function() {
       should.exist(newFile.contents);
       newFile.path.should.equal("/home/test/file.css");
       newFile.shortened.should.equal("file.css");
-      String(newFile.contents).should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7").compile(testfile));
+      String(newFile.contents).should.equal(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7").process(testfile).css);
       done();
     });
 

@@ -8,7 +8,7 @@ module.exports = function(){
 
 
   return map(function(file,callback){
-  	file.contents = new Buffer(prefix(opts).compile(String(file.contents)));
+  	file.contents = new Buffer(prefix(opts).process(String(file.contents)).css);
   	callback(null,file)
   });
 
