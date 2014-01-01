@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "autoprefixer":"~0.8",
-    "event-stream": "~3.0.15"
+    "map-stream": "~0.0.4"
   },
   "main":"index.js",
   "devDependencies": {
