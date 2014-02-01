@@ -31,12 +31,22 @@ function gulpautoprefixer() {
       return;
     } 
     if (file.isStream()) {
-      file.contents = file.contents.pipe(new bufferstreams(autoprefixerTransform(opts)));
+      try {
+        file.contents = file.contents.pipe(new bufferstreams(autoprefixerTransform(opts)));
+      } catch (err) {
+        err.fileName = file.path;
+        stream.emit('error', new gutil.PluginError('gulp-autoprefixer', err));
+      }
       stream.push(file);
       done();
     } else {
-      var prefixed = prefix(opts).process(String(file.contents)).css;
-      file.contents = new Buffer(prefixed);
+      try {
+        var prefixed = prefix(opts).process(String(file.contents)).css;
+        file.contents = new Buffer(prefixed);
+      } catch (err) {
+        err.fileName = file.path;
+        stream.emit('error', new gutil.PluginError('gulp-autoprefixer', err));
+      }
       stream.push(file);
       done();
     }
